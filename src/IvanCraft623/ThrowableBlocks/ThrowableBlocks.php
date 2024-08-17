@@ -8,7 +8,7 @@ use IvanCraft623\ThrowableBlocks\command\ThrowableBlocksCommand;
 use IvanCraft623\ThrowableBlocks\entity\ThrownBlock;
 
 use pocketmine\data\SavedDataLoadingException;
-use pocketmine\data\bedrock\EntityLegacyIds;
+use pocketmine\network\mcpe\protocol\types\entity\EntityIds;
 use pocketmine\entity\EntityDataHelper;
 use pocketmine\entity\EntityFactory;
 use pocketmine\entity\Location;
@@ -59,7 +59,7 @@ class ThrowableBlocks extends PluginBase  implements Listener {
 				throw new SavedDataLoadingException("Item is invalid");
 			}
 			return new ThrownBlock(EntityDataHelper::parseLocation($nbt, $world), null, $item, $nbt);
-		}, ['Thrown Block', 'ThrownBlock'], EntityLegacyIds::ITEM);
+		}, ['Thrown Block', 'ThrownBlock'], EntityIds::ITEM);
 	}
 
 	public function onDisable(): void {
@@ -88,8 +88,9 @@ class ThrowableBlocks extends PluginBase  implements Listener {
 
 	public function onClickAir(PlayerItemUseEvent $event): void {
 		if ($this->throwableBlocks) {
+			$player = $event->getPlayer();
 			$item = $event->getItem();
-			if (isset($this->ignorePlayers[$player->getId()]) && $this->ignorePlayers[$player->getId()] === $item->getId()) {
+			if (isset($this->ignorePlayers[$player->getId()]) && $this->ignorePlayers[$player->getId()] === $item->getTypeId()) {
 				unset($this->ignorePlayers[$player->getId()]);
 			} elseif (!$player->isSpectator() && !$item->isNull() && $item->canBePlaced()) {
 				$throwItem = $item->pop();
@@ -118,6 +119,6 @@ class ThrowableBlocks extends PluginBase  implements Listener {
 	 * @ignoreCancelled
 	 */
 	public function onBlockPlace(BlockPlaceEvent $event): void {
-		$this->ignorePlayers[$event->getPlayer()->getId()] = $event->getItem()->getId();
+		$this->ignorePlayers[$event->getPlayer()->getId()] = $event->getItem()->getTypeId();
 	}
 }
