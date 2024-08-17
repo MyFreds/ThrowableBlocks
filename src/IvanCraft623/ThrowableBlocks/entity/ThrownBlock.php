@@ -7,7 +7,7 @@ namespace IvanCraft623\ThrowableBlocks\entity;
 use pocketmine\block\Block;
 use pocketmine\block\Hopper;
 use pocketmine\block\Lever;
-use pocketmine\block\Skull;
+use pocketmine\block\MobHead;
 use pocketmine\block\Torch;
 use pocketmine\block\utils\LeverFacing;
 use pocketmine\entity\Entity;
@@ -91,14 +91,14 @@ class ThrownBlock extends Throwable {
 				}
 			}
 		}
-		if ($block instanceof Skull || $block instanceof Torch) {
+		if ($block instanceof MobHead || $block instanceof Torch) {
 			if ($face === Facing::DOWN) {
 				$facing = Facing::opposite($face);
 			}
 		}
 		if ($block instanceof Hopper ||
 			$block instanceof Lever ||
-			$block instanceof Skull ||
+			$block instanceof MobHead ||
 			$block instanceof Torch) {
 			$block->setFacing($facing);
 		}
