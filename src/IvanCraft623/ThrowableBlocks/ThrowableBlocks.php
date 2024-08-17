@@ -59,7 +59,7 @@ class ThrowableBlocks extends PluginBase  implements Listener {
 				throw new SavedDataLoadingException("Item is invalid");
 			}
 			return new ThrownBlock(EntityDataHelper::parseLocation($nbt, $world), null, $item, $nbt);
-		}, ['Thrown Block', 'ThrownBlock'], EntityIds::ITEM);
+		}, ['Thrown Block', 'ThrownBlock']);
 	}
 
 	public function onDisable(): void {
