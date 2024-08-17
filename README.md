@@ -25,4 +25,4 @@ Command | Description | Permission
 # Project information
 Version | Pocketmine API | PHP | Status
 --- | --- | --- | ---
-0.0.1 | [PM4](https://github.com/pmmp/PocketMine-MP/tree/stable) | 8 | Functional
+0.1.1 | [PM5](https://github.com/pmmp/PocketMine-MP/releases) | 8.2 | Functional
